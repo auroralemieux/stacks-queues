@@ -4,20 +4,22 @@ require_relative '../lib/Queue'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 describe "Test Queue Implementation" do
+
+
   it "creates a Queue" do
     q = Queue.new
     q.class.must_equal Queue
   end
 
   it "adds something to an empty Queue" do
-    skip
+    # skip
     q = Queue.new
     q.enqueue(10)
     q.to_s.must_equal "[10]"
   end
 
   it "adds multiple somethings to a Queue" do
-    skip
+    # skip
     q = Queue.new
     q.enqueue(10)
     q.enqueue(20)
@@ -26,14 +28,14 @@ describe "Test Queue Implementation" do
   end
 
   it "starts the size of a Queue at 0" do
-    skip
+    # skip
     q = Queue.new
     q.size.must_equal 0
     q.empty?.must_equal true
   end
 
   it "removes something from the Queue" do
-    skip
+    # skip
     q = Queue.new
     q.enqueue(5)
     removed = q.dequeue
@@ -43,7 +45,7 @@ describe "Test Queue Implementation" do
   end
 
   it "removes the right something (LIFO)" do
-    skip
+    # skip
     q = Queue.new
     q.enqueue(5)
     q.enqueue(3)
@@ -55,7 +57,7 @@ describe "Test Queue Implementation" do
   end
 
   it "properly adjusts the size with enqueueing and dequeueing" do
-    skip
+    # skip
     q = Queue.new
     q.empty?.must_equal true
     q.enqueue(-1)
@@ -70,7 +72,7 @@ describe "Test Queue Implementation" do
   end
 
   it "returns the front element in the Queue" do
-    skip
+    # skip
     q = Queue.new
     q.enqueue(40)
     q.enqueue(22)
@@ -81,7 +83,22 @@ describe "Test Queue Implementation" do
   end
 
   # Challege Tests you could write yourself:
-  # it "doesn't alter the size when you call front" do
-  # it "raises an error if you try to dequeue from an empty Queue" do
-  # it "raises an error if you try to call front on an empty Queue" do
+  it "doesn't alter the size when you call front" do
+    q = Queue.new
+    q.enqueue(40)
+    q.size.must_equal 1
+    q.front.must_equal 40
+    q.size.must_equal 1
+  end
+
+  it "raises an error if you try to dequeue from an empty Queue" do
+    q = Queue.new
+    q.empty?.must_equal true
+    proc {q.dequeue}.must_raise ArgumentError
+  end
+  it "raises an error if you try to call front on an empty Queue" do
+    q = Queue.new
+    q.empty?.must_equal true
+    proc {q.front}.must_raise ArgumentError
+  end
 end
